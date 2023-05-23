@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
+@Data
 public class Candidat extends Personne{
 
      @ManyToOne

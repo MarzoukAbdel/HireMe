@@ -19,7 +19,8 @@ public abstract class Personne {
     private String email;
     private String login;
     private String password;
-    private String adress;
+    private String address;
+    private String tele;
 
 
 }
