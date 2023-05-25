@@ -1,12 +1,10 @@
 package com.example.hireme.Service;
 
 import com.example.hireme.Entity.Candidat;
-import com.example.hireme.Execeptiond.RessourcesNotFound;
+import com.example.hireme.Exeception.RessourcesNotFound;
 import com.example.hireme.Repository.CandidatRepository;
 import com.example.hireme.Service.IService.ICandidatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +13,7 @@ import java.util.List;
 
 
 public class CandidatServiceImp implements ICandidatService {
-    private final  CandidatRepository candidatRepository;
-    @Autowired
+    private final CandidatRepository candidatRepository;
     public CandidatServiceImp(CandidatRepository candidatRepository) {
         this.candidatRepository = candidatRepository;
     }
@@ -26,13 +23,19 @@ public class CandidatServiceImp implements ICandidatService {
     public Candidat creeCandidat(Candidat candidat) {
 
      Candidat CandidatEnregistrer = candidatRepository.save(candidat);
-       //
         return CandidatEnregistrer;
     }
 
-    //LIST CANDIDAT
     @Override
+    public List<Candidat> findAllCandidat() {
+              List<Candidat> allCandidat = candidatRepository.findAll();
+              return allCandidat;
+    }
+
+    //LIST CANDIDAT
+
     public List<Candidat> listerCandidats() {
+
         return candidatRepository.findAll();
     }
 

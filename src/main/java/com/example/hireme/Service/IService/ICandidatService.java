@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ICandidatService {
 
     Candidat creeCandidat(Candidat candidat);
-    List<Candidat> listerCandidats();
+    List<Candidat> findAllCandidat();
     Candidat modifierCandidat(Long id , Candidat candidat);
     Candidat  supprimerCandidat(long id);
     List<Candidat> listerCandidatsAMetier(String NomMetier);

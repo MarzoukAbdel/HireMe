@@ -13,10 +13,14 @@ import java.util.List;
 @Data
 public class Candidat extends Personne{
 
+    private int score ;
+
+
+
      @ManyToOne
      @JoinColumn(name = "metier_id")
      private Metier metier;
-     private int score ;
+
 
 
      @OneToMany(mappedBy = "candidat", cascade = CascadeType.ALL)

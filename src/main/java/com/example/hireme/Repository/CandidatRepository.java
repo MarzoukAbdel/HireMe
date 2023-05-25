@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CandidatRepository extends JpaRepository<Candidat, Long> {
 
-    @Query("SELECT Candidat FROM Candidat c INNER JOIN c.metier m WHERE c.metier = :NomMetier")
+    @Query("SELECT Candidat FROM Candidat c INNER JOIN c.metier m WHERE c.metier.nom = :NomMetier")
     List<Candidat> findCandidatsByMetier(@Param("NomMetier") String NomMetier);
 
 

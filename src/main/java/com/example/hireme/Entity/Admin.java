@@ -15,11 +15,8 @@ public class Admin  {
     String prenom;
     String login;
     String password;
-
-
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
     private List<Candidat> candidats;
-
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
     private List<Recruteur> recruteurs;
 

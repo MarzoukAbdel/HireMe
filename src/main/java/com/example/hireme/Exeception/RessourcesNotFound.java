@@ -1,4 +1,4 @@
-package com.example.hireme.Execeptiond;
+package com.example.hireme.Exeception;
 
 public class RessourcesNotFound extends RuntimeException{
 
