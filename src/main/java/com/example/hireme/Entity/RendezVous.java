@@ -15,7 +15,8 @@ public class RendezVous {
 
     private long id ;
     private LocalDate date;
-    private String noteCommentaire;
+    private int note;
+    private String review;
 
     @ManyToOne
     @JoinColumn(name = "candidat_id")

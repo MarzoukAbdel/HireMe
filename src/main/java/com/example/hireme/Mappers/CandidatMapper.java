@@ -31,7 +31,8 @@ public class CandidatMapper {
         if(!isNull(candidat.getMetier())){
             candidatDTO.setMetier_id(candidat.getMetier().getId());
         candidatDTO.setMetierNom(candidat.getMetier().getNom());
-    }
+          }
+
         return candidatDTO;}
 
 

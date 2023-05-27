@@ -4,18 +4,26 @@ import com.example.hireme.Entity.Candidat;
 import com.example.hireme.Exeception.RessourcesNotFound;
 import com.example.hireme.Repository.CandidatRepository;
 import com.example.hireme.Service.IService.ICandidatService;
+import com.example.hireme.Utils.imageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 
 
 public class CandidatServiceImp implements ICandidatService {
     private final CandidatRepository candidatRepository;
-    public CandidatServiceImp(CandidatRepository candidatRepository) {
+    private final imageUtils imageUtils;
+
+    public CandidatServiceImp(CandidatRepository candidatRepository , imageUtils imagetils) {
         this.candidatRepository = candidatRepository;
+        this.imageUtils = imagetils;
     }
 
      //ADD CANDIDAT
@@ -40,7 +48,7 @@ public class CandidatServiceImp implements ICandidatService {
     }
 
     //UPDATE CANDIDAT
-    @Override
+    @Override //TODO SET NOT REQUIRED
     public Candidat modifierCandidat(Long id, Candidat candidat) {
         Candidat candidatExistant = candidatRepository.findById(id).orElseThrow(()-> new RessourcesNotFound("Candidat Not Found"));
 
@@ -77,13 +85,14 @@ public class CandidatServiceImp implements ICandidatService {
 
 
     //DISPLAY CANDIDAT BY ID
-
     @Override
     public Candidat listerCandidatById(long id) {
        Candidat candidatExistant = candidatRepository.findById(id).orElseThrow(()-> new RessourcesNotFound("Candidat Not Found"));
 
      return candidatExistant;
     }
+
+
 
 
     // LIST CANDIDAT BY NAME
@@ -93,6 +102,8 @@ public class CandidatServiceImp implements ICandidatService {
     }
 
 
+
+
     //LIST CANDIDAT BY HIGHEST SCORE
     @Override
     public List<Candidat> listerCandidatsByScoreDesc() {
@@ -100,4 +111,24 @@ public class CandidatServiceImp implements ICandidatService {
     }
 
 
+
+    //UPLOAD IMAGE CANDIDAT
+    @Override
+    public void uploadImage(Long id, MultipartFile imageFile) throws IOException {
+
+        Candidat candidatExistant = candidatRepository.findById(id).orElseThrow(()-> new RessourcesNotFound("Candidat Not Found"));
+
+        if (imageUtils.checkImage(imageFile)) {
+                    byte[] imageData = imageFile.getBytes();
+                    candidatExistant.setImage(imageData);
+                    candidatRepository.save(candidatExistant);
+
+            }
+        else
+           throw new IOException("Failed To Upload image Please Retry");
+
+    }
 }
+
+
+
